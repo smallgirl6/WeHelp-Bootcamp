@@ -1,0 +1,39 @@
+h1 {              color: red;
+                     tect-align: center
+                     font-size: 50px;
+           font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {              color: blue;
+                     tect-align: center
+                     font-size: 30px;
+           font-family: Arial, Helvetica, sans-serif;
+}
+p {                color: black;
+                     tect-align: center
+                     font-size: 8px;
+           font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body{
+           Background-color: #d2b48c;
+           Margin-left: 20%;
+           Margin-right: 20%;
+           Border: 2px dotted black;
+           Padding: 10px 10px 10px 10px; 
+           Font-family:sans-serif; 
+            }
+
+
+footer{
+           
+            
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            line-height: 3px;
+            color: blue;
+                   
+
+    }    
