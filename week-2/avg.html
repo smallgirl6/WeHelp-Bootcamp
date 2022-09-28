@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+function avg(data){
+
+    let sum=0
+    let count= 0
+
+    for(var i =0 ;i<(data["employees"]).length; i++){
+        
+        let k = Object.keys(data["employees"][i])      //求data["employees"]的鍵
+        let v= Object.values(data["employees"][i])     //求data["employees"]的值
+        if(k[2] == "manager" && v[2]==false){           //k[2]和v[1]分別存放"manager"和真假，k[2] =="maager"基本上省略也不會有問題，但以防會出現其他非"maager"的選項
+            
+            count = count +1;  //算迴圈跑了幾圈，跑出來的每一條迴圈都符合IF條件，因此可以知道幾個人符合資格
+            
+            sum = sum +  v[1] ;  //v[1]存放薪水的VALUE，把跑出來的每一條v[1]VALUE加到sum 
+            
+                    
+
+        }       
+    }
+    let avg = sum/count           
+    console.log(avg)
+    
+    
+
+
+}
+avg({
+"employees":[
+{
+"name":"John",
+"salary":30000,
+"manager":false
+},
+{
+"name":"Bob",
+"salary":60000,
+"manager":true
+},
+{
+"name":"Jenny",
+"salary":50000,
+"manager":false
+},
+{
+"name":"Tony",
+"salary":40000,
+"manager":false
+}
+]
+}); // 呼叫 avg 函式
+
+
+
+
+
+</script>
+    
+</body>
+</html>

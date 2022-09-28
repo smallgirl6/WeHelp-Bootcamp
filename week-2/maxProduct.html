@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+
+function maxProduct(nums){
+    
+    let maxnum1 = Math.max.apply(Math,nums);  //求數列中最大的數或用ES6 Math.max(...nums) //求數列中第二大的數
+    // console.log(maxnum1)
+    delete_maxnum1_nums = nums.filter(function(item) { //刪除求數列中最大的數，並做一個已經沒有最大的數的數列delete_maxnum1_nums 
+        return item !== maxnum1;
+    });
+    // console.log(delete_maxnum1_nums)
+    let maxnum2 = Math.max.apply(Math,delete_maxnum1_nums);  //求數列中第二大的數
+    let result1 = maxnum1 * maxnum2;  //若是數列nums只有一個負數或沒有負數，那就可以直接找最大的正數了
+ 
+     //看看數列nums有幾個負數 把負數的數量放入count
+        let count =0;
+        for( let i=0 ; i < nums.length ; i++){
+            if (nums[i]<0){
+                
+                count += 1;           
+            }
+        }
+       
+        if(count>1){                                  //若是數列nums有兩個以上的負數，那要考慮負負得正的問題
+            let maxnum3 = Math.min.apply(Math,nums);  //數列中最小的兩個負值相乘所得的積會是所有數列負值中最大的積，所以取最小
+            
+            delete_maxnum3_nums = nums.filter(function(item) { //刪除求數列中最小的數，並做一個已經沒有最小的數的數列delete_maxnum3_nums 
+                return item !== maxnum3;
+            });
+            let maxnum4 = Math.min.apply(Math,delete_maxnum3_nums);   //求數列中第二小的數
+            let result2 = maxnum3 * maxnum4;                         //在數列nums有兩個以上的負數，有可能會得出另一種結果。雙負數乘積
+                if( result1 > result2){                             //比較數列nums只有一個負數或沒有負數的結果 和 數列nums有兩個以上的負數的結果誰大
+                    console.log(result1);      //雙正數勝出
+                }else{
+                    console.log(result2);     //雙負數勝出
+                }
+        
+        }else{
+            console.log(result1);  //若是數列nums只有一個負數或沒有負數，那就可以直接找最大的正數了，回傳result1，
+      
+        } 
+  
+    
+}   
+    
+    maxProduct([5, 20, 2, 6]) // 得到 120
+    maxProduct([10, -20, 0, 3]) // 得到 30
+    maxProduct([10, -20, 0, -3]) // 得到 60
+    maxProduct([-1, 2]) // 得到 -2
+    maxProduct([-1, 0, 2]) // 得到 0 或 -0
+    maxProduct([5, -1, -2, 0]) // 得到 2
+    maxProduct([-5, -2]) // 得到 10
+
+
+</script>
+    
+</body>
+</html>

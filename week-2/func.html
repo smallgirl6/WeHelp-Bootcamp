@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+    function func(a){
+        function smallfunc(b,c){
+            let bc= b*c;
+            let abc = a + bc
+            return abc;
+        }
+        return smallfunc
+        }
+let ans1 = func(2)(3, 4); // 你補完的函式能印出 2+(3*4) 的結果 14
+console.log(ans1)
+let ans2 = func(5)(1, -5); // 你補完的函式能印出 5+(1*-5) 的結果 0
+console.log(ans2)
+let ans3 = func(-3)(2, 9); // 你補完的函式能印出 -3+(2*9) 的結果 15
+console.log(ans3)
+
+
+
+
+</script>
+    
+</body>
+</html>
