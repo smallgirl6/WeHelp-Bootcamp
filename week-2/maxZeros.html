@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+function maxZeros(nums){
+
+    var zero = 0 //計算連續出現0的次數
+    var maxZero = 0  //計算續出現0的最大次數
+
+    for (let num= 0; num< nums.length ; num++){
+        if(nums[num]==0){//若元素 == 0:
+            zero ++;  //計算zero的總和地方加上1次
+            maxZero= Math.max(maxZero, zero);     
+            //第一次出現的zero值會放到maxZero，隨後若出現的zero若比maxZero大，就會取代舊maxZero
+        }
+        else{
+            zero=0; //若沒有出現0，那計算zero的總和就是0次了
+        }
+    }
+    console.log(maxZero)
+    
+  
+
+}
+maxZeros([0, 1, 0, 0]); // 得到 2
+maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]); // 得到 4
+maxZeros([1, 1, 1, 1, 1]); // 得到 0
+maxZeros([0, 0, 0, 1, 1]) // 得到 3
+
+
+</script>
+    
+</body>
+</html>
