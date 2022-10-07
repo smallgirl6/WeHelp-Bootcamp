@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<head>
+    
+    <!-- 控制網頁縮放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>北歐旅遊</title>
+    <!-- 加入我要用的CSS樣式 -->
+    <link rel="stylesheet" type="text/css" href="rwd-layout.css">
+    
+</head>
+<body>
+    <div class="frame">
+        <div class="left">台北旅遊</div>
+
+        
+        <div class="right">
+            <div class="item">主頁面</div>
+            <div class="item">登入會員</div>
+            <div class="item">加入會員</div>
+            <div class="item">聯繫我們</div>
+        </div>
+        
+
+        <div class="mobile-menu"><img src="./pic/hamburger.png" width="20" height="20" />
+        </div>
+        
+    </div>
+
+    <div class="welcome">
+        <div class="text">歡迎光臨</div>
+    </div>
+
+    <div class="main">
+     
+        <div class="list">
+            <div id="listleft" class="listItem">
+                <div id="pic1" class="listItempic"></div>
+                <div id="listItemtext1" class="listItemtext"></div>
+            </div>
+            <div id="listright" class="listItem" >
+                <div id="pic2" class="listItempic"></div>
+                <div id="listItemtext2" class="listItemtext"></div>
+            </div>
+        </div> 
+
+
+        <div class="Sublist1">
+            <div class="SublistItem">
+                <div id="pic3" class="SublistItempic"></div>
+                <div id="listItemtext3" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic4" class="SublistItempic"></div>
+                <div id="listItemtext4" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic5" class="SublistItempic"></div>
+                <div id="listItemtext5" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic6" class="SublistItempic"></div>
+                <div id="listItemtext6" class="SublistItemtext"></div>
+            </div>
+        </div>
+    
+        <div class="Sublist2">
+            <div class="SublistItem">
+                <div id="pic7" class="SublistItempic"></div>    
+                <div id="listItemtext7" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic8" class="SublistItempic"></div>
+                <div id="listItemtext8" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic9" class="SublistItempic"></div>
+                <div id="listItemtext9" class="SublistItemtext"></div>
+            </div>
+            <div class="SublistItem">
+                <div id="pic10" class="SublistItempic"></div>
+                <div id="listItemtext10" class="SublistItemtext"></div>
+            </div>
+        </div>       
+    
+    </div>
+
+
+    <script>
+       
+        fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json").then(function(response){
+                return response.json();
+        }).then(function(data){
+            var places = data["result"]["results"] // 列表
+            var stitleArray =[] //建立一個Array等等用來放每筆資料的觀光景點(title.stitle)的資料
+            var fileArray =[] //建立一個Array等等用來放每筆資料的觀光第一第一張圖片的資料
+            for(let place=0; place< places.length; place++){ 
+                var title =  places[place] // title是每筆資料
+                stitleArray.push(title.stitle)// 把每筆資料的觀光景點存到stitleArray
+                fileArray.push(title.file.substr(0,(title.file.toLowerCase().indexOf(".jpg"))+4)) // 把每筆資料的觀光景點存到fileArray
+                // console.log(title.file.substr(0,(title.file.toLowerCase().indexOf(".jpg"))+4))  
+                // 找出每一個項目的第一張圖 (先找出第一個.jpg的位置，在指定範圍從開頭列印到.jpg，加4是因為要讓.jpg也加進網址列)
+                // 大寫JPG沒被印出來所以用.toLowerCase()把它忽略大小寫                                                
+                };
+        
+        // 開始創建子元素document.createElement()
+        //文字
+        var p0 = document.createElement("p");
+        var txt0= document.createTextNode(stitleArray[0]);
+        var p1 = document.createElement("p");
+        var txt1= document.createTextNode(stitleArray[1]);
+        var p2 = document.createElement("p");
+        var txt2= document.createTextNode(stitleArray[2]);
+        var p3 = document.createElement("p");
+        var txt3= document.createTextNode(stitleArray[3]);
+        var p4 = document.createElement("p");
+        var txt4= document.createTextNode(stitleArray[4]);
+        var p5 = document.createElement("p");
+        var txt5= document.createTextNode(stitleArray[5]);
+        var p6 = document.createElement("p");
+        var txt6= document.createTextNode(stitleArray[6]);
+        var p7 = document.createElement("p");
+        var txt7= document.createTextNode(stitleArray[7]);
+        var p8 = document.createElement("p");
+        var txt8= document.createTextNode(stitleArray[8]);
+        var p9 = document.createElement("p");
+        var txt9= document.createTextNode(stitleArray[9]);
+     
+
+        // document.appendChild();
+        p0.appendChild(txt0)
+        p1.appendChild(txt1)
+        document.getElementById("listItemtext1").appendChild(p0);
+        document.getElementById("listItemtext2").appendChild(p1);
+        p2.appendChild(txt2)
+        p3.appendChild(txt3)
+        document.getElementById("listItemtext3").appendChild(p2);
+        document.getElementById("listItemtext4").appendChild(p3);
+        p4.appendChild(txt4)
+        p5.appendChild(txt5)
+        document.getElementById("listItemtext5").appendChild(p4);
+        document.getElementById("listItemtext6").appendChild(p5);
+        p6.appendChild(txt6)
+        p7.appendChild(txt7)
+        document.getElementById("listItemtext7").appendChild(p6);
+        document.getElementById("listItemtext8").appendChild(p7);
+        p8.appendChild(txt8)
+        p9.appendChild(txt9)
+        document.getElementById("listItemtext9").appendChild(p8);
+        document.getElementById("listItemtext10").appendChild(p9);
+        
+        //圖片
+        var img1 = document.createElement("img");
+        img1.src = fileArray[0];
+        img1.style.width = "80px";
+        img1.style.height = "50px";
+        document.getElementById("pic1").appendChild(img1)
+        var img2 = document.createElement("img");
+        img2.src = fileArray[1];
+        img2.style.width = "80px";
+        img2.style.height = "50px";
+        document.getElementById("pic2").appendChild(img2)
+        //下面的大圖
+        var img3 = document.createElement("img");
+        img3.src = fileArray[2];
+        
+        
+        document.getElementById("pic3").appendChild(img3)
+        var img4 = document.createElement("img");
+        img4.src = fileArray[3];
+        
+
+        document.getElementById("pic4").appendChild(img4)
+        var img5 = document.createElement("img");
+        img5.src = fileArray[4];
+        
+
+        document.getElementById("pic5").appendChild(img5)
+        var img6 = document.createElement("img");
+        img6.src = fileArray[5];
+       
+        
+        document.getElementById("pic6").appendChild(img6)
+        var img7 = document.createElement("img");
+        img7.src = fileArray[6];
+        
+        document.getElementById("pic7").appendChild(img7)
+        var img8 = document.createElement("img");
+        img8.src = fileArray[7];
+       
+        document.getElementById("pic8").appendChild(img8)
+        var img9 = document.createElement("img");
+        img9.src = fileArray[8];
+        
+        document.getElementById("pic9").appendChild(img9)
+        var img10 = document.createElement("img");
+        img10.src = fileArray[9];
+ 
+        
+        document.getElementById("pic10").appendChild(img10)
+
+
+
+
+    //之後可以修正成迴圈
+    // var imglist=[]
+    //     for(let i=4; i<11 ;i++){
+    //         imglist.push("img"+[i])
+    // }
+    // var piclist=[]
+    //     for(let i=4; i<11 ;i++){
+    //         piclist.push("pic"+[i])
+    // }
+
+        });
+        
+
+    </script>
+     
+   
+</body>
+</html>
+
+
+
