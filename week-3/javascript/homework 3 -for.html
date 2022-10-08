@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="frame">
+
         <div class="left">台北旅遊</div>
 
-        
         <div class="right">
             <div class="item">主頁面</div>
             <div class="item">登入會員</div>
@@ -21,7 +21,6 @@
             <div class="item">聯繫我們</div>
         </div>
         
-
         <div class="mobile-menu"><img src="./pic/hamburger.png" width="20" height="20" />
         </div>
         
@@ -34,18 +33,22 @@
     <div class="main">
      
         <div class="list">
-            <div id="listleft" class="listItem">
+
+            <div class="listItem">
                 <div id="pic1" class="listItempic"></div>
                 <div id="listItemtext1" class="listItemtext"></div>
             </div>
-            <div id="listright" class="listItem" >
+
+            <div  class="listItem" >
                 <div id="pic2" class="listItempic"></div>
                 <div id="listItemtext2" class="listItemtext"></div>
             </div>
+        
         </div> 
 
 
         <div class="Sublist1">
+
             <div class="SublistItem">
                 <div id="pic3" class="SublistItempic"></div>
                 <div id="listItemtext3" class="SublistItemtext"></div>
@@ -62,9 +65,11 @@
                 <div id="pic6" class="SublistItempic"></div>
                 <div id="listItemtext6" class="SublistItemtext"></div>
             </div>
+
         </div>
     
         <div class="Sublist2">
+
             <div class="SublistItem">
                 <div id="pic7" class="SublistItempic"></div>    
                 <div id="listItemtext7" class="SublistItemtext"></div>
@@ -81,6 +86,7 @@
                 <div id="pic10" class="SublistItempic"></div>
                 <div id="listItemtext10" class="SublistItemtext"></div>
             </div>
+            
         </div>       
     
     </div>
@@ -89,73 +95,73 @@
     <script>
        
         fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json").then(function(response){
-                return response.json();
+            return response.json();
         }).then(function(data){
-            var places = data["result"]["results"] // 列表
-            var stitleArray =[] //建立一個Array等等用來放每筆資料的觀光景點(title.stitle)的資料
-            var fileArray =[] //建立一個Array等等用來放每筆資料的觀光第一第一張圖片的資料
+            var places= data["result"]["results"] // 列表
+            var stitleArray= [] //建立一個Array等等用來放每筆資料的觀光景點(title.stitle)的資料
+            var fileArray= [] //建立一個Array等等用來放每筆資料的觀光第一第一張圖片的資料
+            
             for(let place=0; place< places.length; place++){ 
-                var title =  places[place] // title是每筆資料
+                var title= places[place] // title是每筆資料
                 stitleArray.push(title.stitle)// 把每筆資料的觀光景點存到stitleArray
                 fileArray.push(title.file.substr(0,(title.file.toLowerCase().indexOf(".jpg"))+4)) // 把每筆資料的觀光景點存到fileArray
+                
                 // console.log(title.file.substr(0,(title.file.toLowerCase().indexOf(".jpg"))+4))  
                 // 找出每一個項目的第一張圖 (先找出第一個.jpg的位置，在指定範圍從開頭列印到.jpg，加4是因為要讓.jpg也加進網址列)
                 // 大寫JPG沒被印出來所以用.toLowerCase()把它忽略大小寫                                                
-                };
+            };
         
+            //文字
+            var plist= [] //製造p1到p10存到plist
+            for(let i=1;i<11;i++){
+                plist.push("p"+[i]);
+            } 
 
+            var textlist= [] //製造text1到text10存到textlist
+            for(let i=1;i<11;i++){
+                textlist.push("text"+[i]);
+            }
 
-        //文字
-        var plist=[] //製造p1到p10存到plist
-            for(let i=1; i<11 ;i++){
-                plist.push("p"+[i])
-        } 
-        var textlist=[] //製造text1到text10存到textlist
-            for(let i=1; i<11 ;i++){
-                textlist.push("text"+[i])
-        }
-        var listItemtextlist=[] //製造listItemtext1到listItemtext10存到listItemtextlist
-            for(let i=1; i<11 ;i++){
-                listItemtextlist.push("listItemtext"+[i])
-        }
-        for(let i=0; i<10 ;i++){ //需要用到(p1到p10)(text1到text10)(listItemtext1到listItemtext10)分別取出(plist)(textlist)(listItemtextlist)的第0位到第9位                   
-            plist[i] = document.createElement("p");                                //給每個p 加上p標籤   創建p元素      
-            textlist[i] = document.createTextNode(stitleArray[i]);                 //用stitleArray[0-9]抓出的景點創造文字節點再分別用textlist1-10去命名
-            plist[i].appendChild(textlist[i])                                      //將剛剛的文字節點(textlist1-10)添加到新建p元素
-            document.getElementById(listItemtextlist[i]).appendChild(plist[i]);    //把上一條最新建p元素添加到 HTML的id為(listItemtext1-10)標籤           
-            
-        }
+            var listItemtextlist= [] //製造listItemtext1到listItemtext10存到listItemtextlist
+            for(let i=1;i<11;i++){
+                listItemtextlist.push("listItemtext"+[i]);
+            }
 
-       //圖片  
-       var imglist=[] //製造img1到img10存到imglist
-            for(let i=1; i<11 ;i++){
-                imglist.push("img"+[i])
-        } 
-        var piclist=[] //製造pic1到pic10存到piclist
-            for(let i=1; i<11 ;i++){
-                piclist.push("pic"+[i])
-        }
+            for(let i=0;i<10;i++){ //需要用到(p1到p10)(text1到text10)(listItemtext1到listItemtext10)分別取出(plist)(textlist)(listItemtextlist)的第0位到第9位                   
+                plist[i] = document.createElement("p");                                //給每個p 加上p標籤   創建p元素      
+                textlist[i] = document.createTextNode(stitleArray[i]);                 //用stitleArray[0-9]抓出的景點創造文字節點再分別用textlist1-10去命名
+                plist[i].appendChild(textlist[i]);                                      //將剛剛的文字節點(textlist1-10)添加到新建p元素
+                document.getElementById(listItemtextlist[i]).appendChild(plist[i]);    //把上一條最新建p元素添加到 HTML的id為(listItemtext1-10)標籤                
+            }
 
-        //上面的小圖
-        for(let i=0; i<2 ;i++){       //需要用到img1和img2(pic1到pic2)分別取出imglist和piclist的第0位第1位
-            imglist[i] = document.createElement("img");                 //給每個img 加上img標籤
-            imglist[i].src = fileArray[i];                              //這邊把fileArray[i]的網址傳給每個img並賦予src屬性
-            imglist[i].style.width = "80px";                            //給圖img1和img2 一個長寬
-            imglist[i].style.height = "50px";                            
-            document.getElementById(piclist[i]).appendChild(imglist[i]) // 把HTML的id為pic1-2標籤加上剛剛賦予的 src屬性
-            
-        }
+            //圖片  
+            var imglist= [] //製造img1到img10存到imglist
+            for(let i=1;i<11;i++){
+                imglist.push("img"+[i]);
+            } 
 
-        //下面的大圖
-        for(let i=2; i<10 ;i++){                                        //需要用到img3到img10(pic3到pic10)分別取出imglist和piclist的第2位到第9位
-            imglist[i] = document.createElement("img");                 //給每個img 加上img標籤
-            imglist[i].src = fileArray[i];                              //這邊把fileArray[i]的網址傳給每個img並賦予src屬性
-            document.getElementById(piclist[i]).appendChild(imglist[i]) // 把HTML的id為pic3-10標籤加上剛剛賦予的 src屬性 
-                                                                        //這邊不給img3到img10一個長寬，到CSS去設定圖片會比較好     
-        }
+            var piclist= [] //製造pic1到pic10存到piclist
+            for(let i=1;i<11;i++){
+                piclist.push("pic"+[i]);
+            }
 
+            //上面的小圖
+            for(let i=0;i<2;i++){ //需要用到img1和img2(pic1到pic2)分別取出imglist和piclist的第0位第1位
+                imglist[i] = document.createElement("img");                 //給每個img 加上img標籤
+                imglist[i].src = fileArray[i];                              //這邊把fileArray[i]的網址傳給每個img並賦予src屬性
+                imglist[i].style.width = "80px";                            //給圖img1和img2 一個長寬
+                imglist[i].style.height = "50px";                            
+                document.getElementById(piclist[i]).appendChild(imglist[i]); // 把HTML的id為pic1-2標籤加上剛剛賦予的 src屬性
+            }
 
-        });
+            //下面的大圖
+            for(let i=2;i<10;i++){                                        //需要用到img3到img10(pic3到pic10)分別取出imglist和piclist的第2位到第9位
+                imglist[i] = document.createElement("img");                 //給每個img 加上img標籤
+                imglist[i].src = fileArray[i];                              //這邊把fileArray[i]的網址傳給每個img並賦予src屬性
+                document.getElementById(piclist[i]).appendChild(imglist[i]); // 把HTML的id為pic3-10標籤加上剛剛賦予的 src屬性 
+                                                                            //這邊不給img3到img10一個長寬，到CSS去設定圖片會比較好     
+            }
+        })
         
 
     </script>
