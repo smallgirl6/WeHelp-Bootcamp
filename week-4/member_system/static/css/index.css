@@ -1,0 +1,33 @@
+body{
+    margin: 0px auto;   /*緊貼頂部(上下左右)，沒有空隙*/
+}  
+
+.uppermost{
+    /* welcome外區塊 */
+    margin: 0px;
+    /* 完美置中(水平垂直置中) */  
+    display: flex;/* 讓下一層次的項目水平排列 */
+    justify-content: center;/* 左右排列置中 */
+    align-items: center;/* 上下排列置中 */
+    height:200px;
+    background-color:hsl(240, 85%, 13%);
+}
+
+.uppermosttext{ 
+    /* welcome文字部分內區塊 */
+    text-align:center ;/* 文字區塊置中 */
+    font-size:40px;
+    font-weight:bold;
+    color: white;   
+}
+
+.message{ 
+    /* welcome文字部分內區塊 */
+    text-align:center ;/* 文字區塊置中 */
+    font-size:30px;
+    font-weight:bold;   
+}
+.item{
+    text-align:center ;/* 文字區塊置中 */
+    font-size:20px;
+}
