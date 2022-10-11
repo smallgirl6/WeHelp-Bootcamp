@@ -10,7 +10,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 import pymongo #載入 pymongo物件
 
 #連線到MongoDB雲端資料庫
-client = pymongo.MongoClient("mongodb+srv://Hyggenini:Mm2597508@mycluster.nptn3ho.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://Hyggenini:@mycluster.nptn3ho.mongodb.net/?retryWrites=true&w=majority")
 #把資料放到資料庫中
 db = client.mywebsite #選擇操作mywebsite資料庫
 print("資料庫連線建立成功")
