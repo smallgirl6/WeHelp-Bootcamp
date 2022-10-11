@@ -1,4 +1,4 @@
-#pip install beautifulsoup4import urllib.request as request
+
 #中文顯示
 
 import io
