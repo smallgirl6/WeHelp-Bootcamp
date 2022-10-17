@@ -1,20 +1,25 @@
-
 #中文顯示
-
 import io
 import sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+#---------------------------讀取.env的環境變數---------------------------------------------------------------------#
 
+import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
+import pymongo
+
+load_dotenv()
+MONGODB_URI = os.environ['MONGODB_URI']
 #----------------------python flask mongo資料庫----------------------------------------------------
 
 import pymongo #載入 pymongo物件
 
 #連線到MongoDB雲端資料庫
-client = pymongo.MongoClient("mongodb+srv://Hyggenini:@mycluster.nptn3ho.mongodb.net/?retryWrites=true&w=majority")
-#把資料放到資料庫中
-db = client.mywebsite #選擇操作mywebsite資料庫
+client = pymongo.MongoClient(MONGODB_URI)
+# #選擇操作mywebsite資料庫
+db = client.mywebsite
 print("資料庫連線建立成功")
-
 #----------------------python flask網站後端----------------------------------------------------------
 
 from flask import * #import flask全部模組
@@ -81,15 +86,21 @@ def signout():
     del session["account"]
     return redirect("/")
 
-#會員頁面member.html的計算，建立路徑/square對應的處理函式
-@app.route("/square")
-def square():
-    number = request.args.get("num","")
-    number = int(number)
-    square_number = number * number 
-    #把結果回傳到square.html網站
-    return render_template("square.html",result=square_number) 
+#會員頁面member.html的計算，建立路徑/calculate對應的處理函式
+@app.route("/calculate")
+def calculate():
+    num = request.args.get("num","")
+    num = int(num)
+    squ_result = num * num 
+    #把計算的結果(squ_result參數)傳到square函式
+    return redirect(url_for("square",squ_result=squ_result))
 
+#接收calculate函式計算的結果(squ_result參數)然後傳到square.html頁面
+@app.route("/square/<squ_result>")
+def square(squ_result):
+   return render_template("square.html",result=squ_result)
+  
 #啟動網站的伺服器，透過port參數指定port number
-app.run(port=3000) 
+if __name__ == "__main__":
+    app.run(port=3000) 
 
