@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員系統</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="uppermost">
+    <div class="uppermosttext">歡迎光臨，請註冊登入系統</div>
+    </div>
+    <br/>
+    <br/>
+    <div class="message">註冊帳號</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form action="/signup" method="POST">
+      姓名&nbsp&nbsp<input type="text" style="width:200px; height:20px;" name="name" />
+        <br/>
+        <br/>
+      帳號&nbsp&nbsp<input type="text" style="width:200px; height:20px;" name="username" />
+        <br/>
+        <br/>
+      密碼&nbsp&nbsp<input type="password" style="width:200px; height:20px;" name="password" />
+        <br/>
+        <br/>
+        <button>註冊</button>
+    </form>
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="message">登入系統</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form action="/signin" method="POST">
+      帳號&nbsp&nbsp<input type="text" style="width:200px; height:20px;" name="username" />
+        <br/>
+        <br/>
+      密碼&nbsp&nbsp<input type="password" style="width:200px; height:20px;" name="password" />
+        <br/>
+        <br/>
+        <button>登入</button>
+    </form>
+    </div>
+    <br/>
+    <br/>
+</body>
+</html>
