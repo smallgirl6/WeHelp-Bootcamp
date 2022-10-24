@@ -1,8 +1,8 @@
 <h1>歡迎光臨，請註冊登入系統</h1>
 
-<font color="green">後端用Python flask加上MySQL資料庫</font><br/>
+<b>後端用Python flask加上MySQL資料庫<b><br/>
 <br/>
-<font color="green">前端用HTML加上CSS</font><br/>
+<b>前端用HTML加上CSS<b><br/>
 </br>
 1.　首頁
 </br>
