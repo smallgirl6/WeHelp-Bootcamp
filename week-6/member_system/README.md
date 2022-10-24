@@ -79,8 +79,13 @@
 </br>
 </br>
 ![image](https://user-images.githubusercontent.com/111422800/197578605-99dfa366-fc6c-4fa9-88c0-3a30d171f251.png)</br>
+</br>
+<b>加入新留言後<b></br>
+</br>
 ![image](https://user-images.githubusercontent.com/111422800/197578809-b1d72edb-e893-4809-bf89-6a8aad987174.png)</br>
-資料庫端</br>
+</br>
+<b>資料庫端<b></br>
+</br>
 ![image](https://user-images.githubusercontent.com/111422800/197579018-ad783579-c820-4019-9654-d1c90aa0d5d2.png)
 
 
