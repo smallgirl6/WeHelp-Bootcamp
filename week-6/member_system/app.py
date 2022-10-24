@@ -71,12 +71,15 @@ def signup():
     password =request.form["password"]
 
     #檢查member表中username欄位是否有相同username的資料
-    cursor.execute("SELECT * FROM member WHERE username = %s",(username))
+    cursor.execute("SELECT * FROM member WHERE username = %s",(username,))#username,逗號不可刪
     result = cursor.fetchone() 
     
     #如果找到相同username的話，導向error頁面並顯示帳號已經被註冊
     if result != None:
         return redirect("/error?msg=帳號已經被註冊")
+    #姓名、帳號、密碼不可以空白
+    if (len(name)== 0) or (len(username)== 0) or (len(password)== 0):
+        return redirect("/error?msg=請輸入姓名、帳號、密碼")
 
     #如果沒有找到相同username的話，則將資料插入資料庫完成註冊並且將使用者導回首頁
     insert_to_membertable = "INSERT INTO member (name, username, password)  VALUES ( %s, %s, %s)"
@@ -103,8 +106,11 @@ def signin():
     if (len(username) or len(password)) == 0:
         return redirect("/error?msg=請輸入帳號、密碼")
     
-    #登入成功，如果有對應資料就在Seesion紀錄會員資訊，導向會員頁面
+    #登入成功，如果有對應資料就將使⽤者編號、姓名等資訊加入 Session 中紀錄，導向會員頁面
     session["name"] = result[1] #result[1]內存的是name欄位
+    session["id"] =  result[0]
+    session["username"] =  result[2]
+    session["password"] =  result[3]
     return redirect("/member")
 
 #會員頁面member.html的登出/signout功能
@@ -112,6 +118,9 @@ def signin():
 def signout():
     #移除session中的會員資訊
     del session["name"]
+    del session["id"] 
+    del session["username"] 
+    del session["password"] 
     return redirect("/")
 
 #會員頁面member.html的留言/message功能
@@ -137,5 +146,4 @@ def message():
 
 #啟動網站的伺服器，透過port參數指定port number
 if __name__ == "__main__":
-    app.run(port=4000) 
-
+    app.run(port=3000) 
