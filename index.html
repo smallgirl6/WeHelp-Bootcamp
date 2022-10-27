@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員系統</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script>
+        function mylot(){
+        let ten=0
+        let kakunin=0
+        if(f1.number.value >=10) 
+            {ten = ten + 1}
+        else ten = ten + 0;
+        
+        if(f1.priority.value == "hot" || f1.priority.value =="abunai" || f1.priority.value =="yabai") 
+            {ten = ten + 1}
+        else ten = ten + 0;
+
+        if(f1.time.value == "small"|| f1.time.value == "over")
+            {ten = ten + 1}
+        else ten = ten + 0;
+
+        if(f1.specail.value == "yes")
+             {kakunin = kakunin + 1}
+        else kakunin = kakunin+ 0;
+
+
+        if(ten >= 1)
+            { f1.tokuten1.value="P2"}
+        else f1.tokuten1.value="P3";
+
+        if(kakunin == 1)
+            {f1.kakunin1.value="確認してください"}
+        else f1.kakunin1.value="発行してください";
+        }
+        function tool(){
+        let ten=0
+        if(f2.cheken.value  == "yes") 
+            {ten= ten+ 1}
+        else ten = ten + 0;
+
+        if(f2.egg.value  == "yes") 
+            {ten= ten + 1}
+        else ten = ten + 0;
+    
+        if(ten >= 2)
+            {f2.tokuten2.value="P2"}
+        else f2.tokuten2.value="P3";
+        }
+    </script>
+</head>
+<body>
+    <div class="uppermost">
+    <div class="uppermosttext">歡迎光臨，判別優先度系統</div>
+    </div>
+    <br/>
+    <br/>
+    <div class="message">駱駝</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form name="f1">
+    數量&nbsp&nbsp
+        <input type="number" style="width:200px; height:20px;" name="number" />
+    <br/>
+    <br/>
+    屬性&nbsp&nbsp
+        <select name="priority" style="width:200px; height:20px;">
+            <option value=""></option>
+            <option value="hot">熱</option>
+            <option value="abunai">危險</option>
+            <option value="futu">普通</option>
+            <option value="mokuhyou">目標</option>
+            <option value="yabai">完蛋</option>
+        </select>
+    <br/>
+    <br/>
+    時間&nbsp&nbsp
+      <select name="time" style="width:200px; height:20px;">
+            <option value=""></option>
+            <option value="large">大於12</option>
+            <option value="small">小於12</option>
+            <option value="over">超過了</option>
+            <option value="no">沒有</option>
+        </select>
+    <br/>
+    <br/>
+    特殊&nbsp&nbsp
+        <select name="specail" style="width:200px; height:20px;">
+            <option value=""></option>
+            <option value="yes">有</option>
+            <option value="no">沒有</option>
+        </select>
+    <br/>
+    <br/>
+        <input type="button" name="btn1" value="Submit" onclick="mylot()"></p>
+        これは<input name=tokuten1 size="6">です
+    <br/>
+              <input name=kakunin1 size="30">
+    <br/>
+    <br/>
+              <input type="reset" value="Reset">
+    </form>
+    <br/>
+    <br/>  
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="message">雞</div>
+    <div class="item">
+    <form name="f2">
+    <br/>
+    <br/>
+    母雞&nbsp&nbsp
+        <select name="cheken"  style="width:200px; height:20px;">
+            <option value=""></option>
+            <option value="yes">是</option>
+            <option value="no">不是</option>
+        </select>
+    <br/>
+    <br/>
+    下蛋&nbsp&nbsp
+        <select name="egg"  style="width:200px; height:20px;">
+            <option value=""></option>
+            <option value="yes">是</option>
+            <option value="no">不是</option>
+        </select>
+    <br/>
+    <br/>
+        <input type="button" name="btn2" value="Submit" onclick="tool()"></p>
+        これは<input name=tokuten2 size="6">です
+    <br/>
+    <br/>
+        <input type="reset" value="Reset">
+    </form>
+    <br/>
+    <br/>  
+    </div>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div id="list">
+        <div class="article">
+        </div>
+    </div> 
+
+    
+</body>
+</html>
