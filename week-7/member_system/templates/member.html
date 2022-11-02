@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員頁面</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>   
+    <div class="uppermost">
+        <div class="uppermosttext">歡迎光臨，這是會員頁</div>
+    </div>
+    <br/>
+    <div class="message">
+        <div id="welcome_name">{{name}}，歡迎登入系統</div>
+    <br/>
+    <br/>
+    <a href="/signout">登出系統</a>
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="message">查詢會員姓名</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form name="query_username_form">
+        <input type="text" style="width:200px; height:20px;" name="query_uname" />
+        <input type="button" name="query_btn" value="查詢" onclick="query_username()" />  
+    </form>
+    </div>
+    <br/>
+    <br/>
+    <!-- 顯示會員的姓名 -->
+    <div class="item">
+        <div id="query_name"></div>
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="message">更新我的姓名</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form name="update_myname_form" >
+        <input type="text" style="width:200px; height:20px;" placeholder="輸入新的姓名" name="update_name" />
+        <input type="button" name="update_btn" value="更新" onclick="update_myname()"/>                                                          
+    </form>
+    </div>
+    <br/>
+    <br/>
+    <!-- 顯示更新成功或失敗 -->
+    <div class="item">
+        <div id="update_status"></div>
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="message">快來留言吧</div>
+    <br/>
+    <br/>
+    <div class="item">
+    <form action="/message" method="POST">
+        內容&nbsp&nbsp<input type="text" style="width:200px; height:20px;" name="content" />
+        <br/>
+        <br/>
+        <button>送出</button>
+    </form>
+    </div>
+    <br/>
+    <br/>
+    <hr><!-- <hr>--------------------------------------------- -->
+    <br/>
+    <br/>
+    <div class="item">
+    <!-- 列出name_message_array內的姓名和留言內容(迴圈) -->
+        {% for name,message in name_message_array %}
+        {{ name }}&nbsp&nbsp : &nbsp&nbsp{{ message }}<br/>
+        {% endfor %}
+    </div>
+<script>
+
+//搜尋姓名的function//
+function query_username(){  
+//抓取使用者輸入資料
+let query_username = query_username_form.query_uname.value;
+//透過AJAX fetch API連線到api/member?username=抓取資料
+let src=`http://127.0.0.1:3000/api/member?username=${query_username}`;
+
+fetch(src).then(function(response){
+    return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
+}).then(function(result){
+    // 把結果縣示在HTML的div id="query_name"
+    let query_name_html = document.getElementById("query_name");
+    if (result["data"] ==null){
+        query_name_html.innerHTML = "查無此人";
+    }
+    else {
+        let query_name= result["data"]["name"]// data值的name值
+        query_name_html.innerHTML = query_name + "("+ query_username +")";
+    }
+})
+
+}
+
+//更新姓名的function//
+function update_myname(){  
+//抓取使用者輸入資料
+let update_myname = update_myname_form.update_name.value;
+//給fetch內body:的request body的資料型態
+let req_body ={
+    "name": update_myname
+};
+//給fetch內header:的Content-type的資料型態
+let header ={
+    "Content-type": "application/json",
+};
+//透過AJAX fetch API連線到api/update_myname傳送資料
+let src="http://127.0.0.1:3000/api/update_myname";
+
+fetch(src,{
+  method:'PATCH',
+  body:JSON.stringify(req_body),
+  headers:header,
+}).then(function(response){
+    return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
+}).then(function(result){  
+// 把update_status結果縣示在HTML的div id="update_status"
+let update_status_html = document.getElementById("update_status");
+if (result["ok"] ==true){
+    welcome_name.innerHTML =`${update_myname}，歡迎登入系統`;
+    update_status_html.innerHTML = "更新成功";
+}
+else {
+    update_status_html.innerHTML = "更新失敗";
+}
+})
+//清空輸入框數據
+update_myname_form.update_name.value = "";
+}
+</script>
+</body>
+</html>
