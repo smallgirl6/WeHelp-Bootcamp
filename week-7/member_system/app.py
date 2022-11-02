@@ -25,10 +25,6 @@ import mysql.connector   #載入MSQL
 cursor = connection.cursor() # 獲取操作游標，也就是開始操作
 print("資料庫連線建立成功")
 
-
-#----------------------python Restful API---------------------------------------------------------------------------#
-from flask_restful import Resource, Api #pip install flask flask_restful  
-from flask_cors import CORS             #跨來源的資源共享pip install flask-cors 
 #----------------------python flask網站後端--------------------------------------------------------------------------#
 from flask import * #import flask全部模組
 
@@ -38,7 +34,6 @@ app = Flask(
     static_url_path ="/"   #靜態檔案對應的網址路徑     
 )    
 app.secret_key="gogogo"  #為了使用Sessions，必須設置一個密鑰
-CORS(app)#開啟權限，對外讓大家存去api
 
 #處理路由
 #首頁index.html
@@ -127,7 +122,6 @@ def signout():
     del session["id"]  
     return redirect("/")
 
-
 #查詢會員資料姓名API     /api/member?username=ply
 @app.route("/api/member")
 def api_member():
@@ -146,7 +140,6 @@ def api_member():
             })
     #如果沒有找到相同username的話，回應一個JSON的:null資訊
     return jsonify({"data":None})
-
 
 #更新我的姓名API  /api/update_myname
 @app.route("/api/update_myname", methods=["PATCH"])  #PATCH的CRUD:更新/修改
@@ -173,7 +166,6 @@ def update_myname():
                 "error":True
             })
         
-
 #會員頁面member.html的留言/message功能
 @app.route("/message",methods=["POST"])  
 def message():
@@ -194,7 +186,7 @@ def message():
     
     return redirect("/member")
 
-
 #啟動網站的伺服器，透過port參數指定port number
 if __name__ == "__main__":
     app.run(port=3000,debug=True) 
+    
