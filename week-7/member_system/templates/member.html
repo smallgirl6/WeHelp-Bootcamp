@@ -101,13 +101,13 @@ function query_username(){
         let query_name_html = document.getElementById("query_name");
         if (result["data"] ==null){
             query_name_html.innerHTML = "查無此人";
-        }
+        };
         else {
             let query_name= result["data"]["name"]// data值的name值
             query_name_html.innerHTML = query_name + "("+ query_username +")";
-        }
-    })
-}
+        };
+    });
+};
 
 //更新姓名的function//
 function update_myname(){  
@@ -135,14 +135,14 @@ function update_myname(){
         if (result["ok"] ==true){
             welcome_name.innerHTML =`${update_myname}，歡迎登入系統`;
             update_status_html.innerHTML = "更新成功";
-        }
+        };
         else {
             update_status_html.innerHTML = "更新失敗";
-        }
-    })
+        };
+    });
     //清空輸入框數據
     update_myname_form.update_name.value = "";
-}
+};
 </script>
 </body>
 </html>
