@@ -96,3 +96,33 @@
 ![image](https://user-images.githubusercontent.com/111422800/199569318-187a5801-fc88-459c-a4f6-7b31431994c5.png)
 </br>
 </br>
+
+6.　如果按下登出，會回到註冊登入系統頁面
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199657408-9301e0b3-b663-406d-bef0-e0ea6f428d3d.png)
+</br>
+</br>
+
+7.　這時候註冊登入系統頁面按回到上一頁，還是會回到剛剛的會員頁面，但session早就已經在剛剛按下登出匙時被消除了
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199657691-0846e427-1c16-4e45-bbc9-9cee5db663bc.png)
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199657771-6f1bc2c7-292b-4caa-a796-bfd11a6cae9e.png)
+
+8.　這時候想要在更改姓名都沒有辦法了，若想把言承旭改成吳建豪，會顯示「更新失敗」
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199658201-718e176e-01e8-411a-badc-a6285904a532.png)
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199658238-795b9f5d-e45e-4014-8a53-69e378cf7aa4.png)
+
+9.　資料庫也不會被變更，還是顯示原來的言承旭
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199658343-6a92be7b-968d-43a1-94e0-67d12deb984a.png)
+</br>
+</br>
