@@ -89,61 +89,59 @@
 
 //搜尋姓名的function//
 function query_username(){  
-//抓取使用者輸入資料
-let query_username = query_username_form.query_uname.value;
-//透過AJAX fetch API連線到api/member?username=抓取資料
-let src=`http://127.0.0.1:3000/api/member?username=${query_username}`;
+    //抓取使用者輸入資料
+    let query_username = query_username_form.query_uname.value;
+    //透過AJAX fetch API連線到api/member?username=抓取資料
+    let src = `http://127.0.0.1:3000/api/member?username=${query_username}`;
 
-fetch(src).then(function(response){
-    return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
-}).then(function(result){
-    // 把結果縣示在HTML的div id="query_name"
-    let query_name_html = document.getElementById("query_name");
-    if (result["data"] ==null){
-        query_name_html.innerHTML = "查無此人";
-    }
-    else {
-        let query_name= result["data"]["name"]// data值的name值
-        query_name_html.innerHTML = query_name + "("+ query_username +")";
-    }
-})
-
+    fetch(src,{method:"GET",}).then(function(response){
+        return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
+    }).then(function(result){
+        // 把結果縣示在HTML的div id="query_name"
+        let query_name_html = document.getElementById("query_name");
+        if (result["data"] ==null){
+            query_name_html.innerHTML = "查無此人";
+        }
+        else {
+            let query_name= result["data"]["name"]// data值的name值
+            query_name_html.innerHTML = query_name + "("+ query_username +")";
+        }
+    })
 }
 
 //更新姓名的function//
 function update_myname(){  
-//抓取使用者輸入資料
-let update_myname = update_myname_form.update_name.value;
-//給fetch內body:的request body的資料型態
-let req_body ={
-    "name": update_myname
-};
-//給fetch內header:的Content-type的資料型態
-let header ={
-    "Content-type": "application/json",
-};
-//透過AJAX fetch API連線到api/update_myname傳送資料
-let src="http://127.0.0.1:3000/api/update_myname";
+    //抓取使用者輸入資料
+    let update_myname = update_myname_form.update_name.value;
+    //給fetch內body:的request body的資料型態
+    let req_body = {
+        "name": update_myname
+    };
+    //給fetch內header:的Content-type的資料型態
+    let header = {
+        "Content-type": "application/json",
+    };
+    //透過AJAX fetch API連線到api/update_myname傳送資料
+    let src = "http://127.0.0.1:3000/api/member";
 
-fetch(src,{
-  method:'PATCH',
-  body:JSON.stringify(req_body),
-  headers:header,
-}).then(function(response){
-    return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
-}).then(function(result){  
-// 把update_status結果縣示在HTML的div id="update_status"
-let update_status_html = document.getElementById("update_status");
-if (result["ok"] ==true){
-    welcome_name.innerHTML =`${update_myname}，歡迎登入系統`;
-    update_status_html.innerHTML = "更新成功";
-}
-else {
-    update_status_html.innerHTML = "更新失敗";
-}
-})
-//清空輸入框數據
-update_myname_form.update_name.value = "";
+    fetch(src,{
+        method:"PATCH",
+        body:JSON.stringify(req_body),
+        headers:header,}).then(function(response){
+            return response.json();//將資料用JSON的格式詮釋成:物件和陣列的組合
+    }).then(function(result){  
+        // 把update_status結果縣示在HTML的div id="update_status"
+        let update_status_html = document.getElementById("update_status");
+        if (result["ok"] ==true){
+            welcome_name.innerHTML =`${update_myname}，歡迎登入系統`;
+            update_status_html.innerHTML = "更新成功";
+        }
+        else {
+            update_status_html.innerHTML = "更新失敗";
+        }
+    })
+    //清空輸入框數據
+    update_myname_form.update_name.value = "";
 }
 </script>
 </body>
