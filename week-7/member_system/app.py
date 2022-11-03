@@ -34,7 +34,6 @@ app = Flask(
     static_url_path ="/"   #靜態檔案對應的網址路徑     
 )    
 app.secret_key="gogogo"  #為了使用Sessions，必須設置一個密鑰
-
 #處理路由
 #首頁index.html
 @app.route("/")
@@ -122,50 +121,48 @@ def signout():
     del session["id"]  
     return redirect("/")
 
-#查詢會員資料姓名API     /api/member?username=ply
-@app.route("/api/member")
+#查詢會員資料姓名API     /api/member?username=ply   methods=['GET']
+#更新我的姓名API        /api/member                methods=["PATCH"]
+@app.route("/api/member",methods=["GET","PATCH"]) #GET不可省略
 def api_member():
-    #檢查member表中username欄位是否有相同username的資料
-    username = request.args.get("username")
-    cursor.execute("SELECT * FROM member WHERE username = %s",(username,))#username,逗號不可刪
-    result = cursor.fetchone() 
-    #如果找到相同username的話，回應JSON資訊
-    if result != None:
-         return jsonify({
-             "data":{
-                    "id":result[0],       #result[0]內存的是id欄位
-                    "name":result[1],     #result[1]內存的是name欄位
-                    "username":result[2]  #result[2]內存的是username欄位
-                    }
-            })
-    #如果沒有找到相同username的話，回應一個JSON的:null資訊
-    return jsonify({"data":None})
-
-#更新我的姓名API  /api/update_myname
-@app.route("/api/update_myname", methods=["PATCH"])  #PATCH的CRUD:更新/修改
-def update_myname(): 
-    new_user_name = request.get_json(force = True)
-    #沒輸入名字就會顯示更新失敗
-    if (len(new_user_name["name"])>0):
-        #進資料庫更新新名字，更新目前存在session["id"]的ID為前端request body傳來的json資料內的name值
-        update_name_membertable = "UPDATE member SET name = %s WHERE id = %s"
-        val_update_name = (new_user_name["name"],session["id"])
-        cursor.execute(update_name_membertable, val_update_name)
-        connection.commit() # 確保數據已提交到數據庫
-        
-        #尋找資料庫有沒有新名字
-        cursor.execute("SELECT * FROM member WHERE id = %s && name = %s",(session["id"] ,new_user_name["name"],))#session["id"],逗號不可刪
+    if request.method =="GET":
+        #檢查member表中username欄位是否有相同username的資料
+        username = request.args.get("username")
+        cursor.execute("SELECT * FROM member WHERE username = %s",(username,))#username,逗號不可刪
         result = cursor.fetchone() 
-
+        #如果找到相同username的話，回應JSON資訊
         if result != None:
             return jsonify({
-                    "ok":True
-                })
-        
-    return jsonify({
-                "error":True
+                "data":{
+                        "id":result[0],       #result[0]內存的是id欄位
+                        "name":result[1],     #result[1]內存的是name欄位
+                        "username":result[2]  #result[2]內存的是username欄位
+                        }
             })
-        
+        #如果沒有找到相同username的話，回應一個JSON的:null資訊
+        return jsonify({
+            "data":None
+        })
+
+    if request.method =="PATCH":
+        new_user_name = request.get_json(force = True)
+        #沒輸入名字就會顯示更新失敗 #檢查使用者是否登入
+        if (len(new_user_name["name"])>0) and ("name" in session):
+            #進資料庫更新新名字，更新目前存在session["id"]的ID為前端request body傳來的json資料內的name值
+            update_name_membertable = "UPDATE member SET name = %s WHERE id = %s"
+            val_update_name = (new_user_name["name"],session["id"])
+            cursor.execute(update_name_membertable, val_update_name)
+            connection.commit() # 確保數據已提交到數據庫
+            # 更新session["name"]的姓名
+            session["name"] = new_user_name["name"] 
+            return jsonify({
+                "ok":True
+            })
+        return jsonify({
+        "error":True
+        })
+    
+
 #會員頁面member.html的留言/message功能
 @app.route("/message",methods=["POST"])  
 def message():
@@ -186,7 +183,7 @@ def message():
     
     return redirect("/member")
 
+
 #啟動網站的伺服器，透過port參數指定port number
 if __name__ == "__main__":
     app.run(port=3000,debug=True) 
-    
