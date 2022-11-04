@@ -126,3 +126,34 @@
 ![image](https://user-images.githubusercontent.com/111422800/199658343-6a92be7b-968d-43a1-94e0-67d12deb984a.png)
 </br>
 </br>
+
+<h2>用Postman測試會員登入狀態</h2>
+
+1.　在/signin輸入帳號密碼，此時會得到一組session value
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199905796-09c7a6cc-a68c-493d-b63d-16ea82d2831a.png)
+
+2.　在/api/member輸入json的body request，此時會得到"ok": true 代表成功登入且更新姓名
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199906117-2ba257d9-8583-4923-844a-5f1c987ecb60.png)
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199906514-6dee561a-cc7e-406d-805d-030a9eca82eb.png)
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199906583-0a32c446-c077-4ce7-abc7-5d2dbba3eb2f.png)
+
+3.　把session刪掉後再重新測試，資料課沒有被變更
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199906885-e19191cf-1be2-4913-b4b2-9ad9ec715e97.png)
+
+4.　在沒有session的狀況下得到"error": true 
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199907074-8ad9d41a-4ecf-480a-a357-3612c15da2da.png)
+</br>
+</br>
+![image](https://user-images.githubusercontent.com/111422800/199906583-0a32c446-c077-4ce7-abc7-5d2dbba3eb2f.png)
