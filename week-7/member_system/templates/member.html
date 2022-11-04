@@ -103,13 +103,13 @@ function query_username(){
             query_name_html.innerHTML = "查無此人";
         }
         else {
-            let query_name= result["data"]["name"]// data值的name值
+            let query_name= result["data"]["name"];// data值的name值
             query_name_html.innerHTML = query_name + "("+ query_username +")";
-        }
-    })
+        };
+    });
     //清空輸入框數據
     query_username_form.query_uname.value = "";
-}
+};
 
 //更新姓名的function//
 function update_myname(){  
@@ -140,8 +140,8 @@ function update_myname(){
         }
         else {
             update_status_html.innerHTML = "更新失敗";
-        }
-    })
+        };
+    });
     //清空輸入框數據
     update_myname_form.update_name.value = "";
 }
