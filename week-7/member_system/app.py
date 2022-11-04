@@ -148,11 +148,10 @@ def api_member():
             return jsonify({
                 "data":None
             })
-        
         return jsonify({
             "data":None
         })
-    
+  
     if request.method =="PATCH":
         new_user_name = request.get_json(force = True)
         #沒輸入名字就會顯示更新失敗 #檢查使用者是否登入
@@ -171,7 +170,6 @@ def api_member():
         "error":True
         })
     
-
 #會員頁面member.html的留言/message功能
 @app.route("/message",methods=["POST"])  
 def message():
