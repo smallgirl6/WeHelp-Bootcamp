@@ -89,14 +89,17 @@ def signup():
     connection.commit() # 確保數據已提交到數據庫
     
     return redirect("/")
-
+""
 #會員頁面member.html的登入/signin功能
 @app.route("/signin",methods=["POST"])
 def signin():
     #從前端接收資料
     username =request.form["username"]
     password =request.form["password"]
-    
+    {
+    "username":"Lin001",
+    "password":"Lin001"
+}
     #根據接收到的資料跟資料庫作互動
     cursor.execute("SELECT * FROM member WHERE username = %s AND password = %s",(username,password,))
     result = cursor.fetchone()
@@ -125,25 +128,31 @@ def signout():
 #更新我的姓名API        /api/member                methods=["PATCH"]
 @app.route("/api/member",methods=["GET","PATCH"]) #GET不可省略
 def api_member():
+    
     if request.method =="GET":
-        #檢查member表中username欄位是否有相同username的資料
-        username = request.args.get("username")
-        cursor.execute("SELECT * FROM member WHERE username = %s",(username,))#username,逗號不可刪
-        result = cursor.fetchone() 
-        #如果找到相同username的話，回應JSON資訊
-        if result != None:
+        #檢查使用者是否登入
+        if ("name" in session):
+            username = request.args.get("username")
+            cursor.execute("SELECT * FROM member WHERE username = %s",(username,))#username,逗號不可刪
+            result = cursor.fetchone() 
+            #如果找到相同username的話，回應JSON資訊
+            if result != None:
+                return jsonify({
+                    "data":{
+                            "id":result[0],       #result[0]內存的是id欄位
+                            "name":result[1],     #result[1]內存的是name欄位
+                            "username":result[2]  #result[2]內存的是username欄位
+                            }
+                })
+            #如果沒有找到相同username的話，回應一個JSON的:null資訊
             return jsonify({
-                "data":{
-                        "id":result[0],       #result[0]內存的是id欄位
-                        "name":result[1],     #result[1]內存的是name欄位
-                        "username":result[2]  #result[2]內存的是username欄位
-                        }
+                "data":None
             })
-        #如果沒有找到相同username的話，回應一個JSON的:null資訊
-        return jsonify({
-            "data":None
-        })
-
+        else:
+            return jsonify({
+                "data":None
+            })
+    
     if request.method =="PATCH":
         new_user_name = request.get_json(force = True)
         #沒輸入名字就會顯示更新失敗 #檢查使用者是否登入
