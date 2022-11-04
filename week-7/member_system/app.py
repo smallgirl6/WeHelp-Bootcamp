@@ -148,10 +148,10 @@ def api_member():
             return jsonify({
                 "data":None
             })
-        else:
-            return jsonify({
-                "data":None
-            })
+        
+        return jsonify({
+            "data":None
+        })
     
     if request.method =="PATCH":
         new_user_name = request.get_json(force = True)
